@@ -63,15 +63,16 @@ zoos = {
 # Central Park Zoo has just received 4 wolves. Alter the `zoos` information to reflect this new change:
 # Put this hash: { species: "Wolf", count: 4 } in the array under the `:animals` key in Central Park Zoo
 
+zoos["Central Park Zoo"][:animals][2] = {species: "Wolf", count: 4}
 
 
-#what am i doing
+
 
 # The 2 penguins in the Bronx Zoo just had a baby. Alter the `zoos` information to reflect this new change:
 # Increment the number for the `:count` key in the "Penguin" hash in the Bronx Zoo array by 1. 
 # You can assume that the animal at index 0 will always be the "Penguin" hash.
 
-
+zoos["Bronx Zoo"][:animals][0][:count] += 1
 
 
 
@@ -79,16 +80,40 @@ zoos = {
 # In the array of animals under each Zoo, shovel this hash: { species: "Panda", count: 2 }
 
 
+def panda(hash)
+
+    hash.each do |zoo_name, zoo_hash|
+        zoo_hash[:animals] << { species: "Panda", count: 2 }
+ 
+    end
+end
+
+panda(zoos)
+
 
 
 
 # Return the number of Tigers at the Bronx Zoo.
 # Rather than assuming that the animal at index 2 will always be the "Tiger" hash:
-# First find the "Tiger" hash from the array of Animals at the Bronx Zoo and then, access the value under the ":count" key
+# First find the "Tiger" hash from the array of Animals at the Bronx Zoo and then, 
+#access the value under the ":count" key
 
+def findTiger(zoos)
+    
+    zoos.find do |zoo_name, zoo_hash|
+        
+        foundTiger = zoo_hash[:animals].each do |animal_hash|
+                         animal_hash[:species] == "Tiger"
+                             
+        end
+        foundTiger[:count]
+        binding.pry
+    end
 
+    
+end
 
-
+findTiger(zoos)
 
 
 # Generalize the process to find the ticket price of a specific zoo.
